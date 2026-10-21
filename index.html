@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para mi niña</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--rosa:#f7c6d6;--rosa2:#f2a7bf;--rosa3:#e98aa8;--pal:#fff0f5;--blanco:#fffafb;--tinta:#7a4a5c;--sombra:rgba(233,138,168,.28);
+--script:'Dancing Script','Brush Script MT','Segoe Script',cursive;--serif:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;font-family:var(--serif);color:var(--tinta);overflow-x:hidden;
+background:linear-gradient(180deg,#ffe3ec 0%,#fff0f5 45%,#ffe9f1 100%) fixed;
+padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#deco{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.nube{position:absolute;background:rgba(255,255,255,.75);border-radius:100px;filter:blur(1px);opacity:.8;animation:deriva linear infinite}
+.nube::before,.nube::after{content:"";position:absolute;background:inherit;border-radius:50%}
+.nube::before{width:48%;height:160%;left:14%;top:-70%}
+.nube::after{width:38%;height:130%;right:14%;top:-45%}
+.nube.r{background:rgba(247,198,214,.65)}
+@keyframes deriva{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+.cor{position:absolute;bottom:-40px;color:var(--rosa2);opacity:0;animation:sube linear infinite}
+@keyframes sube{0%{transform:translateY(0) rotate(-8deg);opacity:0}10%{opacity:.55}90%{opacity:.4}100%{transform:translateY(-115vh) rotate(10deg);opacity:0}}
+.est{position:absolute;color:#fff;text-shadow:0 0 8px var(--rosa2);opacity:0;animation:brilla ease-in-out infinite}
+@keyframes brilla{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:.9;transform:scale(1)}}
+main{position:relative;z-index:1;min-height:100vh;min-height:100dvh}
+#escena{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:24px;animation:entra 1.4s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#escena.oculta{display:none}
+.sobre-wrap{perspective:1100px;width:min(86vw,380px)}
+.sobre{position:relative;width:100%;aspect-ratio:3/2;filter:drop-shadow(0 18px 26px var(--sombra))}
+.fondo{position:absolute;inset:0;background:linear-gradient(160deg,#fff 0%,#fde3ec 100%);border-radius:10px;border:1px solid rgba(233,138,168,.35)}
+.mini{position:absolute;left:9%;right:9%;top:8%;height:70%;background:var(--blanco);border-radius:6px;transition:transform 1s ease .5s;z-index:2}
+.frente{position:absolute;inset:0;z-index:3;border-radius:10px;overflow:hidden}
+.frente svg{width:100%;height:100%;display:block}
+.solapa{position:absolute;left:0;right:0;top:0;height:58%;z-index:4;transform-origin:top center;transition:transform 1s cubic-bezier(.5,.1,.3,1),z-index 0s .45s;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+.solapa svg{width:100%;height:100%;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.sobre.abierto .solapa{transform:rotateX(180deg);z-index:1}
+.sobre.abierto .mini{transform:translateY(-34%)}
+.sello{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:15%;aspect-ratio:1;transition:opacity .4s}
+.sobre.abierto .sello{opacity:0}
+.kitty{position:absolute;right:7%;bottom:9%;width:19%;z-index:5;transition:opacity .4s}
+.sobre.abierto .kitty{opacity:0}
+.btn{font-family:var(--script);font-size:1.45rem;color:#fff;background:linear-gradient(135deg,var(--rosa2),var(--rosa3));border:0;border-radius:40px;padding:13px 40px;cursor:pointer;box-shadow:0 8px 20px var(--sombra),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .25s,box-shadow .25s;-webkit-tap-highlight-color:transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,.volver:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px var(--rosa3)}
+#cartaVista{display:none;padding:34px 16px 60px}
+#cartaVista.visible{display:block;animation:desplegar 1.3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes desplegar{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
+.hoja{position:relative;max-width:660px;margin:0 auto;background:linear-gradient(180deg,#fff 0%,#fff8fa 100%);border-radius:6px;border:1px solid rgba(233,138,168,.3);box-shadow:0 20px 50px var(--sombra),0 2px 6px rgba(233,138,168,.18);padding:clamp(28px,6vw,56px) clamp(22px,6vw,56px) clamp(30px,5vw,48px)}
+.hoja::before{content:"";position:absolute;inset:9px;border:1px dashed rgba(242,167,191,.55);border-radius:3px;pointer-events:none}
+.hoja>*{position:relative}
+.saludo{font-family:var(--script);font-size:clamp(1.9rem,6vw,2.5rem);color:var(--rosa3);margin-bottom:1.3rem;line-height:1.2}
+.hoja p{font-size:clamp(1.15rem,3.6vw,1.3rem);line-height:1.75;margin-bottom:1.2em;text-align:left;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.cierre{font-family:var(--script);font-size:clamp(1.6rem,5.2vw,2.1rem)!important;color:var(--rosa3);margin-top:1.6rem;line-height:1.3!important}
+.firma{font-family:var(--script);font-size:2.2rem;color:var(--tinta);text-align:right;margin-top:.8rem}
+.volver{display:block;margin:30px auto 0;font-family:var(--script);font-size:1.25rem;color:var(--rosa3);background:rgba(255,255,255,.8);border:1px solid var(--rosa);border-radius:30px;padding:9px 26px;cursor:pointer;box-shadow:0 4px 12px var(--sombra)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}.cor,.est{display:none}.nube{animation:none!important;transform:none}}
+</style>
+</head>
+<body>
+<div id="deco" aria-hidden="true"></div>
+<main>
+<section id="escena">
+  <div class="sobre-wrap">
+    <div class="sobre" id="sobre">
+      <div class="fondo"></div>
+      <div class="mini"></div>
+      <div class="frente">
+        <svg viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fbd5e2"/></linearGradient></defs>
+          <path d="M0 0 L150 115 L0 200Z" fill="#fde6ee" stroke="#f2a7bf" stroke-opacity=".5" stroke-width="1"/>
+          <path d="M300 0 L150 115 L300 200Z" fill="#fde6ee" stroke="#f2a7bf" stroke-opacity=".5" stroke-width="1"/>
+          <path d="M0 200 L150 90 L300 200Z" fill="url(#g1)" stroke="#f2a7bf" stroke-opacity=".55" stroke-width="1"/>
+          <g fill="#f2a7bf" opacity=".7"><path d="M50 170c-5-4-9-7-9-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-4 7-9 11z" transform="scale(.9) translate(8 14)"/><path d="M95 185c-4-3-6-5-6-8a3.500 3.500 0 0 1 6-2 3.500 3.500 0 0 1 6 2c0 3-2 5-6 8z"/><path d="M235 183c-4-3-6-5-6-8a3.500 3.500 0 0 1 6-2 3.500 3.500 0 0 1 6 2c0 3-2 5-6 8z"/></g>
+        </svg>
+      </div>
+      <div class="solapa">
+        <svg viewBox="0 0 300 116" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0 H300 L150 116Z" fill="#fbd3e1" stroke="#f2a7bf" stroke-opacity=".6" stroke-width="1"/>
+          <path d="M0 0 H300 L150 100Z" fill="#fde9f0" opacity=".7"/>
+        </svg>
+      </div>
+      <svg class="sello" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#e98aa8"/><path d="M12 18c-4-3-6.500-5-6.500-7.500a3.300 3.300 0 0 1 6.500-1 3.300 3.300 0 0 1 6.500 1C18.500 13 16 15 12 18z" fill="#fff"/></svg>
+      <svg class="kitty" viewBox="0 0 64 56" aria-hidden="true">
+        <path d="M10 22 8 4l16 7zM54 22l2-18-16 7z" fill="#fff" stroke="#6b4a55" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse cx="32" cy="32" rx="26" ry="20" fill="#fff" stroke="#6b4a55" stroke-width="2"/>
+        <ellipse cx="20" cy="32" rx="2.500" ry="3.200" fill="#4a3340"/><ellipse cx="44" cy="32" rx="2.500" ry="3.200" fill="#4a3340"/>
+        <ellipse cx="32" cy="38" rx="3" ry="2.200" fill="#f7c85a" stroke="#6b4a55" stroke-width="1"/>
+        <path d="M6 30l10 2M6 38l10-2M58 30l-10 2M58 38l-10-2" stroke="#4a3340" stroke-width="1.500" stroke-linecap="round"/>
+        <g transform="translate(47 8)"><path d="M0 4 7 0v8zM14 4 7 0v8z" fill="#f2a7bf" stroke="#6b4a55" stroke-width="1.200" stroke-linejoin="round" transform="translate(-2 0)"/><circle cx="5" cy="4" r="2.300" fill="#e98aa8" stroke="#6b4a55" stroke-width="1"/></g>
+      </svg>
+    </div>
+  </div>
+  <button class="btn" id="abrir" type="button">Abrir</button>
+</section>
+
+<section id="cartaVista" aria-live="polite">
+  <article class="hoja" id="carta">
+    <h1 class="saludo">para mi niña.</h1>
+    <p>Salo, la verdad es que llevo pensando mucho en todo lo que ha pasado estos días y hay muchas cosas que quisiera decirte, pero a veces no sé cómo hacerlo sin terminar enredándome o sin sentir que no estoy explicando bien lo que de verdad quiero que entiendas.</p>
+    <p>Yo sé que hay cosas que hago mal, y créeme que a veces me da demasiada rabia conmigo misma porque después me pongo a pensar y digo, ¿por qué hice eso así si podía hacerlo de otra manera? A veces me quedo pensando demasiado, me distraigo con otras cosas o dejo algo para después sin pensar en cómo puede sentirse la otra persona mientras tanto. Y cuando caigo en cuenta, ya hice sentir mal a alguien que quiero demasiado.</p>
+    <p>Con lo del lunes, yo de verdad estaba intentando pensar en cómo te sentirías tú, porque sé que esperar te pone mal y no quería que estuvieras ahí esperando por mí más tiempo. Pero también entiendo que tú necesitabas que yo estuviera contigo, que me naciera ir a acompañarte y que pudieras sentir que estabas conmigo cuando te encontrabas así. Creo que a veces me enredo tanto pensando en cómo hacer las cosas que termino sin hacer lo que realmente necesitabas de mí en ese momento.</p>
+    <p>Y lo de la foto, Salo, de verdad quisiera que pudieras entender que nunca ha sido por pena. Tú sabes que yo te he subido antes, y no porque tenga que demostrarle nada a nadie, sino porque me gusta que seas tú, porque me hace feliz estar contigo y no tengo por qué esconderlo. Se me pasó en ese momento y después tenía en mente hacerte el videíto, pero entiendo que tú lo hayas visto de otra manera. Me da vaina que hayas llegado a pensar que me avergüenzo de ti, porque si hay algo que no quiero es que te sientas así estando conmigo.</p>
+    <p>A mí me gustaría que pudieras ver un poquito más allá de las veces que me equivoco, no para que ignores las cosas que te duelen, sino para que también puedas ver que estoy intentando aprender a hacer las cosas mejor contigo. Yo sé que no basta con decirte que voy a cambiar esto o aquello, y tampoco quiero llenarte de promesas que después se queden en palabras. Quiero que lo vayas viendo tú misma, poquito a poquito, en las cosas que haga y en cómo te trate.</p>
+    <p>Pero, Salo, también quiero hablarte de algo que me quedó doliendo. Cuando me dijiste que ya estabas acostumbrada a llorar por las cosas que yo te hacía, no te voy a mentir, me dolió bastante. Y no porque crea que no tengas motivos para sentirte mal conmigo, sino porque me hizo pensar en cómo estamos llegando a sentirnos las dos. Yo sé que has llorado por cosas que han pasado entre nosotras y no quiero minimizarte nada, pero yo también he llorado, también me he sentido mal y también hay cosas que me pesan, aunque a veces no sepa cómo explicártelas.</p>
+    <p>No quiero que esto se convierta en quién sufre más o quién ha hecho más por la otra, porque no se trata de eso. Simplemente quisiera que no llegáramos al punto de pensar que la otra no siente, que no le importa o que todo le da igual. Porque a mí sí me importa, Salo. Me importas tú, me importa cómo te sientes conmigo y me importa mucho más de lo que a veces consigo hacerte ver.</p>
+    <p>Yo no quiero que sientas que tienes que estar mal para que yo reaccione, ni que tengas que pedirme las mismas cosas una y otra vez. Hay detalles en los que quiero ser más atenta, cosas que quiero que me nazcan y momentos en los que quiero aprender a dejar de pensar tanto y simplemente estar para ti. También quisiera que pudiéramos entendernos de verdad, porque siento que a veces nos quedamos tanto en lo que hizo o dejó de hacer la otra que terminamos sin ver lo que está pasando por dentro de cada una.</p>
+    <p>Tú sabes cómo soy, sabes que a veces me quedo pensando mucho las cosas y que no siempre me salen como las tengo en mi cabeza. Pero eso no significa que no me importen, y mucho menos cuando se trata de ti. Yo quiero aprender a quererte de una manera que tú también puedas sentir, no solamente de la manera en que yo creo que te estoy queriendo.</p>
+    <p>Y fuera de todo lo que hemos discutido, quiero que sepas que me sigue haciendo feliz tenerte en mi vida. Me gusta poder decir que eres mi novia, me gusta compartir mis cosas contigo, contarte mis bobadas y poder tener esos momenticos contigo en los que no necesitamos hacer nada extraordinario para estar bien. Me gusta tenerte cerquita y sentir que podemos disfrutar de nosotras sin que todo termine convirtiéndose en un problema.</p>
+    <p>No necesito que todo sea perfecto para sentirme feliz contigo, pero sí quisiera que pudiéramos encontrar una manera de estar juntas en la que las dos nos sintamos queridas, escuchadas y comprendidas. Que podamos hablar de lo que nos duele sin terminar haciéndonos más daño, y que también podamos reconocer las cosas bonitas que seguimos teniendo, incluso cuando estamos pasando por momentos difíciles.</p>
+    <p>No te escribo esto para que se te olvide lo que pasó ni para que sientas que tienes que responderme algo bonito después de leerlo. Solo quería que supieras cómo me he sentido yo también y que, a pesar de todo lo que ha pasado, sigo teniendo muchas ganas de hacer las cosas mejor contigo. Quiero que eso se note en mis acciones, que puedas ir viendo los cambios sin que yo tenga que estar repitiéndote todo el tiempo que quiero mejorar.</p>
+    <p>Te amo muchísimo, Salo. Y quisiera que pudiéramos ir aprendiendo las dos, porque no quiero que esto se trate de que una tenga que cambiarlo todo mientras la otra solo espera. Quiero que podamos encontrarnos en la mitad, entendernos y sentir que seguimos siendo nosotras, que todavía podemos compartir cosas bonitas y que vale la pena cuidar lo que tenemos.</p>
+    <p>Y bueno, flaquita, creo que eso era lo que quería decirte. A veces tengo tantas cosas por dentro que no sé cómo sacarlas sin terminar diciendo más de la cuenta, pero espero que puedas entender lo que quiero transmitirte. Yo también estoy sintiendo muchas cosas con todo esto, pero por encima de mis enredos, mis errores y las cosas que todavía tengo que aprender, quiero que sepas que lo que siento por ti es de verdad.</p>
+    <p class="cierre">Te amo mucho, flaquita.</p>
+    <p class="firma">M.</p>
+  </article>
+  <button class="volver" id="volver" type="button">Volver al sobre</button>
+</section>
+</main>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var deco=document.getElementById('deco'),R=Math.random;
+  function add(c,s,css){var e=document.createElement('div');e.className=c;e.style.cssText=css;if(s)e.textContent=s;deco.appendChild(e)}
+  var small=innerWidth<600;
+  for(var i=0;i<(small?4:6);i++){var w=90+R()*110;add('nube'+(i%2?' r':''),'','width:'+w+'px;height:'+w*.28+'px;top:'+(R()*85)+'%;animation-duration:'+(90+R()*80)+'s;animation-delay:-'+(R()*120)+'s')}
+  if(!reduce){
+    for(i=0;i<(small?7:11);i++)add('cor','♥','left:'+(R()*96)+'%;font-size:'+(10+R()*14)+'px;animation-duration:'+(16+R()*14)+'s;animation-delay:-'+(R()*25)+'s');
+    for(i=0;i<(small?6:10);i++)add('est',R()>.5?'✦':'✧','left:'+(R()*96)+'%;top:'+(R()*92)+'%;font-size:'+(10+R()*10)+'px;animation-duration:'+(4+R()*5)+'s;animation-delay:-'+(R()*8)+'s');
+  }
+  var sobre=document.getElementById('sobre'),esc=document.getElementById('escena'),vista=document.getElementById('cartaVista'),btn=document.getElementById('abrir');
+  var t;
+  btn.addEventListener('click',function(){
+    btn.disabled=true;sobre.classList.add('abierto');
+    t=setTimeout(function(){esc.classList.add('oculta');vista.classList.add('visible');window.scrollTo(0,0)},reduce?50:1900);
+  });
+  document.getElementById('volver').addEventListener('click',function(){
+    clearTimeout(t);vista.classList.remove('visible');esc.classList.remove('oculta');window.scrollTo(0,0);
+    sobre.classList.remove('abierto');btn.disabled=false;btn.focus({preventScroll:true});
+  });
+})();
+</script>
+</body>
+</html>
